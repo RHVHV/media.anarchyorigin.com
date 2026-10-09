@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AnarchyOrigin — Программа для блогеров</title>
+<link rel="icon" type="image/png" href="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png">
+<link rel="apple-touch-icon" href="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
@@ -45,7 +47,7 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  a, button, div, span, li, h1, h2, h3, p {
+  a, button, div, span, li, h1, h2, h3, p, svg, img {
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -99,6 +101,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     z-index: 100;
     transition: all 0.4s ease;
   }
@@ -110,10 +113,32 @@
     padding: 14px 32px;
   }
 
+  .nav-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .nav-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230,92,0,0.35);
+    box-shadow: 0 0 20px rgba(230,92,0,0.2);
+    flex-shrink: 0;
+    background: #0d0d14;
+  }
+
+  .nav-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
   .nav-logo {
     font-size: 18px;
     font-weight: 900;
     letter-spacing: -0.03em;
+    line-height: 1.25;
+    padding: 2px 0;
     background: linear-gradient(135deg, #fff, var(--o3));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -186,6 +211,25 @@
     from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  .hero-icon {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 28px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(230,92,0,0.4);
+    box-shadow: 0 0 60px rgba(230,92,0,0.35), 0 0 120px rgba(230,92,0,0.15);
+    background: #0d0d14;
+    animation: floatIcon 6s ease-in-out infinite;
+  }
+
+  @keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .hero-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .badge {
     display: inline-flex;
@@ -343,6 +387,7 @@
     letter-spacing: -0.03em;
     line-height: 1.1;
     margin-bottom: 18px;
+    padding-bottom: 0.05em;
   }
 
   .section h2 span {
@@ -656,12 +701,26 @@
     margin: 0 auto;
   }
 
+  .cta-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(230,92,0,0.4);
+    box-shadow: 0 0 50px rgba(230,92,0,0.3);
+    background: #0d0d14;
+  }
+
+  .cta-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
   .cta-section h2 {
     font-size: clamp(34px, 6vw, 60px);
     font-weight: 900;
     letter-spacing: -0.03em;
     margin-bottom: 22px;
     line-height: 1.1;
+    padding-bottom: 0.05em;
   }
 
   .cta-section h2 span {
@@ -730,14 +789,34 @@
     z-index: 1;
   }
 
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .footer-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230,92,0,0.35);
+    background: #0d0d14;
+    flex-shrink: 0;
+  }
+
+  .footer-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
   .footer-logo {
     font-size: 22px;
     font-weight: 900;
     letter-spacing: -0.03em;
+    line-height: 1.2;
+    padding: 3px 0;
     background: linear-gradient(135deg, #fff, var(--o3));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
   }
 
   .footer-links {
@@ -766,6 +845,7 @@
     .section { padding: 90px 20px; }
     .section-header { margin-bottom: 56px; }
     .hero { padding: 120px 20px 80px; }
+    .hero-icon { width: 84px; height: 84px; border-radius: 22px; }
     .nav { padding: 16px 20px; }
     .nav.scrolled { padding: 12px 20px; }
   }
@@ -783,6 +863,12 @@
     .feature { padding: 28px 24px; }
     .reward-card { padding: 36px 28px; }
     .nav-cta { padding: 8px 16px; font-size: 13px; }
+    .nav-logo { font-size: 16px; }
+    .nav-icon { width: 30px; height: 30px; border-radius: 8px; }
+    .hero-icon { width: 76px; height: 76px; border-radius: 20px; }
+    .cta-icon { width: 64px; height: 64px; border-radius: 16px; }
+    .footer-icon { width: 32px; height: 32px; border-radius: 8px; }
+    .footer-logo { font-size: 19px; }
   }
 
   @media (min-width: 1500px) {
@@ -801,7 +887,12 @@
 <body>
 
 <nav class="nav" id="nav">
-  <div class="nav-logo">AnarchyOrigin</div>
+  <div class="nav-brand">
+    <div class="nav-icon">
+      <img src="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png" alt="AnarchyOrigin">
+    </div>
+    <div class="nav-logo">AnarchyOrigin</div>
+  </div>
   <a href="https://anarchyorigin.com/support" class="nav-cta">Связаться</a>
 </nav>
 
@@ -809,6 +900,9 @@
   <div class="hero-bg"></div>
   <div class="hero-grid-bg"></div>
   <div class="hero-content">
+    <div class="hero-icon">
+      <img src="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png" alt="AnarchyOrigin">
+    </div>
     <div class="badge">Программа для блогеров</div>
     <h1>AnarchyOrigin<br>Медиа-партнёрство</h1>
     <p>Настоящая анархия без вайпов. Стабильный сервер 24/7. Создавайте контент — получайте деньги и внутриигровые бонусы.</p>
@@ -1023,6 +1117,9 @@
 
 <section class="cta-section">
   <div class="cta-content reveal">
+    <div class="cta-icon">
+      <img src="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png" alt="AnarchyOrigin">
+    </div>
     <h2>Готовы <span>начать?</span></h2>
     <p>Напишите нам — обсудим детали, подберём условия и запустим первую рекламную кампанию уже на этой неделе.</p>
     <a href="https://anarchyorigin.com/support" class="btn-primary">
@@ -1033,7 +1130,12 @@
 </section>
 
 <footer>
-  <div class="footer-logo">AnarchyOrigin</div>
+  <div class="footer-brand">
+    <div class="footer-icon">
+      <img src="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png" alt="AnarchyOrigin">
+    </div>
+    <div class="footer-logo">AnarchyOrigin</div>
+  </div>
   <div class="footer-links">
     <a href="https://anarchyorigin.com">Главная</a>
     <a href="https://anarchyorigin.com/support">Поддержка</a>

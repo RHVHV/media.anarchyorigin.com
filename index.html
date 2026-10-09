@@ -23,8 +23,17 @@
     --green: #22c55e;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
 
   body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -36,12 +45,32 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  a, button {
+  a, button, div, span, li, h1, h2, h3, p {
     -webkit-tap-highlight-color: transparent;
+  }
+
+  a, button {
     -webkit-touch-callout: none;
   }
 
-  a:focus, button:focus { outline: none; }
+  a:focus, button:focus, div:focus,
+  a:active, button:active, div:active {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus { outline: none; }
+  :focus-visible { outline: 2px solid var(--o3); outline-offset: 2px; }
+
+  ::selection {
+    background: rgba(230,92,0,0.3);
+    color: #fff;
+  }
+
+  ::-moz-selection {
+    background: rgba(230,92,0,0.3);
+    color: #fff;
+  }
 
   body::before {
     content: '';

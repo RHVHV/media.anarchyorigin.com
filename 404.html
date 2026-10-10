@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — AnarchyOrigin</title>
+<link rel="icon" type="image/png" href="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #08080d;
+    color: #f0f0f5;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(230,92,0,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(249,168,37,0.05) 0%, transparent 40%);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  a:focus { outline: none; }
+  a:focus-visible { outline: 2px solid #ff8c42; outline-offset: 3px; }
+
+  .wrap {
+    text-align: center;
+    max-width: 460px;
+    width: 100%;
+  }
+
+  .logo {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 30px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(230,92,0,0.35);
+    background: #0d0d14;
+    box-shadow: 0 0 50px rgba(230,92,0,0.15);
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .num {
+    font-size: 110px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.06em;
+    color: #ff8c42;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: #9a9aa8;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  .links {
+    display: grid;
+    gap: 12px;
+  }
+
+  .link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    transition: border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .link:hover {
+    border-color: rgba(230,92,0,0.5);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .link-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .link-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(230,92,0,0.1);
+    border: 1px solid rgba(230,92,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.25s ease;
+  }
+
+  .link:hover .link-icon {
+    background: rgba(230,92,0,0.18);
+  }
+
+  .link-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: #f9a825;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .link-text {
+    text-align: left;
+    min-width: 0;
+  }
+
+  .link-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #f0f0f5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }
+
+  .link-sub {
+    font-size: 12px;
+    color: #6a6a78;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .link-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #6a6a78;
+    transition: color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  }
+
+  .link:hover .link-arrow {
+    color: #08080d;
+    background: #f9a825;
+    transform: translateX(3px);
+  }
+
+  .link-arrow svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (max-width: 480px) {
+    .num { font-size: 88px; }
+    .logo { width: 68px; height: 68px; border-radius: 16px; margin-bottom: 24px; }
+    h1 { font-size: 19px; }
+    p { font-size: 14px; margin-bottom: 24px; }
+    .link { padding: 14px 16px; gap: 12px; }
+    .link-icon { width: 36px; height: 36px; border-radius: 9px; }
+    .link-icon svg { width: 16px; height: 16px; }
+    .link-title { font-size: 14px; }
+    .link-sub { font-size: 11px; }
+    .link-arrow { width: 28px; height: 28px; border-radius: 8px; }
+    .link-arrow svg { width: 14px; height: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="logo">
+    <img src="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png" alt="AnarchyOrigin">
+  </div>
+
+  <div class="num">404</div>
+  <h1>Страница не найдена</h1>
+  <p>По этому адресу ничего нет. Возможно, ссылка устарела или в ней опечатка.</p>
+
+  <div class="links">
+    <a class="link" href="/">
+      <div class="link-left">
+        <div class="link-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-title">На главную</div>
+          <div class="link-sub">media.anarchyorigin.com</div>
+        </div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </div>
+    </a>
+
+    <a class="link" href="https://anarchyorigin.com">
+      <div class="link-left">
+        <div class="link-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+          </svg>
+        </div>
+        <div class="link-text">
+          <div class="link-title">Основной сайт</div>
+          <div class="link-sub">anarchyorigin.com</div>
+        </div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

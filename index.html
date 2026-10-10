@@ -34,7 +34,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.mcsrvstat.us">
-<link rel="preconnect" href="https://worldtimeapi.org">
+<link rel="preconnect" href="https://timeapi.io">
 <link rel="dns-prefetch" href="https://github.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
 <style>
@@ -1892,10 +1892,10 @@
       statObserver.observe(el);
     }
 
-    fetchWithTimeout('https://worldtimeapi.org/api/timezone/Europe/Moscow', 8000)
+    fetchWithTimeout('https://timeapi.io/api/Time/current/zone?timeZone=Europe/Moscow', 8000)
       .then(r => r.json())
       .then(data => {
-        const dt = new Date(data.datetime);
+        const dt = new Date(data.dateTime);
         setMonths(dt.getFullYear(), dt.getMonth());
       })
       .catch(() => {
@@ -1908,10 +1908,10 @@
     const yearEl = document.getElementById('currentYear');
     if (!yearEl) return;
 
-    fetchWithTimeout('https://worldtimeapi.org/api/timezone/Europe/Moscow', 8000)
+    fetchWithTimeout('https://timeapi.io/api/Time/current/zone?timeZone=Europe/Moscow', 8000)
       .then(r => r.json())
       .then(data => {
-        const dt = new Date(data.datetime);
+        const dt = new Date(data.dateTime);
         yearEl.textContent = dt.getFullYear();
       })
       .catch(() => {

@@ -1,4 +1,4 @@
-# anarchyorigin.github.io
+# media.anarchyorigin.com
 Сайт предназначенный для информации.
 Основной сайт - https://anarchyorigin.com.
 

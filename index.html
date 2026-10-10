@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AnarchyOrigin — Программа для блогеров</title>
-<link rel="icon" type="image/png" href="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png">
-<link rel="apple-touch-icon" href="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png">
+<title>AnarchyOrigin — Программа для блогеров и стримеров Minecraft</title>
+<meta name="description" content="Медиа-партнёрство с AnarchyOrigin: оплата за видео, процент с продаж и внутриигровые бонусы для блогеров и стримеров Minecraft. Сервер без вайпов с постоянным миром.">
+<meta name="keywords" content="AnarchyOrigin, программа для блогеров, медиа-партнёрство Minecraft, блогерам Minecraft, стримерам Minecraft, оплата за видео, Minecraft анархия, реклама сервера">
+<meta name="author" content="AnarchyOrigin">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#08080d">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AnarchyOrigin">
+<link rel="canonical" href="https://media.anarchyorigin.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AnarchyOrigin">
+<meta property="og:title" content="AnarchyOrigin — Программа для блогеров и стримеров Minecraft">
+<meta property="og:description" content="Оплата за видео, процент с продаж и внутриигровые бонусы. Подключайся: mc.anarchyorigin.com">
+<meta property="og:url" content="https://media.anarchyorigin.com/">
+<meta property="og:image" content="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="AnarchyOrigin">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AnarchyOrigin — Программа для блогеров и стримеров Minecraft">
+<meta name="twitter:description" content="Оплата за видео, процент с продаж и внутриигровые бонусы. Подключайся: mc.anarchyorigin.com">
+<meta name="twitter:image" content="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png">
+<meta name="twitter:image:alt" content="AnarchyOrigin">
+<link rel="icon" type="image/png" href="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png">
+<link rel="apple-touch-icon" href="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.mcsrvstat.us">
+<link rel="preconnect" href="https://worldtime.timezone.io">
+<link rel="dns-prefetch" href="https://github.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -93,6 +121,7 @@
   }
 
   a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 
   .nav {
     position: fixed;
@@ -144,21 +173,119 @@
     -webkit-text-fill-color: transparent;
   }
 
-  .nav-cta {
-    padding: 10px 22px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--line);
-    border-radius: 10px;
+  .nav-links { display: flex; gap: 26px; align-items: center; margin-left: auto; margin-right: auto; }
+
+  .nav-links a {
     font-size: 14px;
+    font-weight: 500;
+    color: var(--t2);
+    transition: color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .nav-links a:hover { color: var(--o2); }
+
+  .nav-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
+  .copy-ip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
     font-weight: 600;
+    color: var(--t1);
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .copy-ip:hover { background: rgba(230,92,0,0.12); border-color: var(--line-accent); color: var(--o2); }
+
+  .copy-ip svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+  .copy-ip .ip-label { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--t3); text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px; }
+
+  .copy-ip .tip {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    padding: 6px 12px;
+    background: var(--o2);
+    color: #08080d;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .copy-ip.done .tip { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .burger {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--line);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
     transition: all 0.3s ease;
   }
 
-  .nav-cta:hover {
-    background: rgba(230,92,0,0.15);
-    border-color: var(--line-accent);
-    color: var(--o2);
+  .burger:hover { background: rgba(230,92,0,0.12); border-color: var(--line-accent); }
+
+  .burger span { display: block; width: 18px; height: 2px; background: var(--t1); border-radius: 2px; transition: all 0.3s ease; }
+  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed;
+    top: 70px;
+    left: 16px;
+    right: 16px;
+    background: rgba(13,13,20,0.98);
+    backdrop-filter: blur(24px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 16px;
+    z-index: 99;
+    opacity: 0;
+    transform: translateY(-16px);
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
   }
+
+  .mobile-menu.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+  .mobile-menu a {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--t1);
+    transition: all 0.25s ease;
+  }
+
+  .mobile-menu a:hover { background: rgba(230,92,0,0.12); color: var(--o2); }
+
+  .mobile-menu .divider { height: 1px; background: var(--line); margin: 8px 0; }
+
+  .mobile-menu .copy-ip { width: 100%; justify-content: center; margin-top: 8px; padding: 14px; font-size: 14px; }
 
   .hero {
     position: relative;
@@ -405,7 +532,7 @@
 
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
   }
 
@@ -439,8 +566,14 @@
 
   .stat-card:hover::before { opacity: 1; }
 
+  .stat-card.live-stat { border-color: rgba(34,197,94,0.25); }
+  .stat-card.live-stat::before {
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    opacity: 1;
+  }
+
   .stat-value {
-    font-size: clamp(44px, 6vw, 64px);
+    font-size: clamp(40px, 5.5vw, 60px);
     font-weight: 900;
     line-height: 1;
     letter-spacing: -0.04em;
@@ -449,6 +582,16 @@
     -webkit-text-fill-color: transparent;
     margin-bottom: 14px;
     font-variant-numeric: tabular-nums;
+  }
+
+  .stat-value.updated {
+    animation: pop 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.12); }
+    100% { transform: scale(1); }
   }
 
   .stat-label {
@@ -464,6 +607,28 @@
     font-size: 12px;
     margin-top: 10px;
     font-style: italic;
+  }
+
+  .live-lbl {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--t2);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+
+  .live-lbl .live-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--green);
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
   }
 
   .features-grid {
@@ -841,13 +1006,28 @@
     font-size: 13px;
   }
 
+  @media (max-width: 1100px) {
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: 13px; }
+    .copy-ip { font-size: 12px; padding: 9px 14px; }
+    .copy-ip .ip-label { display: none; }
+    .nav { padding: 18px 24px; }
+    .nav.scrolled { padding: 12px 24px; }
+  }
+
+  @media (max-width: 950px) {
+    .nav-links { display: none; }
+    .nav-actions .copy-ip { display: none; }
+    .burger { display: flex; }
+    .nav { padding: 14px 20px; }
+    .nav.scrolled { padding: 12px 20px; }
+  }
+
   @media (max-width: 900px) {
     .section { padding: 90px 20px; }
     .section-header { margin-bottom: 56px; }
     .hero { padding: 120px 20px 80px; }
     .hero-icon { width: 84px; height: 84px; border-radius: 22px; }
-    .nav { padding: 16px 20px; }
-    .nav.scrolled { padding: 12px 20px; }
   }
 
   @media (max-width: 600px) {
@@ -862,7 +1042,6 @@
     .stat-card { padding: 36px 24px; }
     .feature { padding: 28px 24px; }
     .reward-card { padding: 36px 28px; }
-    .nav-cta { padding: 8px 16px; font-size: 13px; }
     .nav-logo { font-size: 16px; }
     .nav-icon { width: 30px; height: 30px; border-radius: 8px; }
     .hero-icon { width: 76px; height: 76px; border-radius: 20px; }
@@ -889,19 +1068,52 @@
 <nav class="nav" id="nav">
   <div class="nav-brand">
     <div class="nav-icon">
-      <img src="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png" alt="AnarchyOrigin">
+      <img src="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png" alt="Логотип AnarchyOrigin">
     </div>
     <div class="nav-logo">AnarchyOrigin</div>
   </div>
-  <a href="https://anarchyorigin.com/support" class="nav-cta">Связаться</a>
+  <div class="nav-links">
+    <a href="https://anarchyorigin.com">Главная</a>
+    <a href="https://about.anarchyorigin.com">О сервере</a>
+    <a href="https://news.anarchyorigin.com">Новости</a>
+    <a href="https://anarchyorigin.com/support">Поддержка</a>
+  </div>
+  <div class="nav-actions">
+    <button class="copy-ip" data-ip="mc.anarchyorigin.com">
+      <span class="ip-label">IP:</span>
+      <span>mc.anarchyorigin.com</span>
+      <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      <span class="tip">IP скопирован</span>
+    </button>
+    <button class="burger" id="burger" aria-label="Меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://anarchyorigin.com">Главная</a>
+  <a href="https://about.anarchyorigin.com">О сервере</a>
+  <a href="https://news.anarchyorigin.com">Новости</a>
+  <a href="https://anarchyorigin.com/support">Поддержка</a>
+  <a href="https://anarchyorigin.com/rules">Правила</a>
+  <a href="https://anarchyorigin.com/requisites">Реквизиты</a>
+  <div class="divider"></div>
+  <button class="copy-ip" data-ip="mc.anarchyorigin.com">
+    <span>Скопировать IP</span>
+    <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+    <span class="tip">IP скопирован</span>
+  </button>
+</div>
 
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid-bg"></div>
   <div class="hero-content">
     <div class="hero-icon">
-      <img src="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png" alt="AnarchyOrigin">
+      <img src="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png" alt="AnarchyOrigin Minecraft-сервер">
     </div>
     <div class="badge">Программа для блогеров</div>
     <h1>AnarchyOrigin<br>Медиа-партнёрство</h1>
@@ -924,6 +1136,15 @@
     <p class="section-subtitle">Мы работаем стабильно, чтобы ваша аудитория играла без перебоев</p>
   </div>
   <div class="stats-grid">
+    <div class="stat-card live-stat reveal" id="onlineCard">
+      <div class="stat-value" id="playersOnline">—</div>
+      <div class="live-lbl"><span class="live-dot"></span>Игроков онлайн</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-value" id="monthsWorked">0</div>
+      <div class="stat-label">Месяцев работы</div>
+      <div class="stat-note">С января 2026 года</div>
+    </div>
     <div class="stat-card reveal">
       <div class="stat-value" data-count="99.8" data-decimals="1" data-suffix="%">0</div>
       <div class="stat-label">Аптайм сервера</div>
@@ -935,14 +1156,9 @@
       <div class="stat-note">Без просадок и лагов</div>
     </div>
     <div class="stat-card reveal">
-      <div class="stat-value" data-count="24" data-suffix="/7">0</div>
-      <div class="stat-label">Работа без остановок</div>
-      <div class="stat-note">Круглосуточный онлайн</div>
-    </div>
-    <div class="stat-card reveal">
-      <div class="stat-value" data-count="1.21" data-decimals="2" data-suffix=".11">0</div>
-      <div class="stat-label">Актуальная версия</div>
-      <div class="stat-note">Java Edition</div>
+      <div class="stat-value" data-count="70" data-suffix="">0</div>
+      <div class="stat-label">Слотов</div>
+      <div class="stat-note">Онлайн 24/7</div>
     </div>
   </div>
 </section>
@@ -1118,7 +1334,7 @@
 <section class="cta-section">
   <div class="cta-content reveal">
     <div class="cta-icon">
-      <img src="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png" alt="AnarchyOrigin">
+      <img src="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png" alt="AnarchyOrigin">
     </div>
     <h2>Готовы <span>начать?</span></h2>
     <p>Напишите нам — обсудим детали, подберём условия и запустим первую рекламную кампанию уже на этой неделе.</p>
@@ -1132,23 +1348,87 @@
 <footer>
   <div class="footer-brand">
     <div class="footer-icon">
-      <img src="https://cdn.easydonate.ru/images/logos/6f/c7/6fc7ca838acd3627ec80b99cd3f7eb05f8fe50ef489348ea8b2850b52b80d863.png" alt="AnarchyOrigin">
+      <img src="https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png" alt="AnarchyOrigin">
     </div>
     <div class="footer-logo">AnarchyOrigin</div>
   </div>
   <div class="footer-links">
     <a href="https://anarchyorigin.com">Главная</a>
+    <a href="https://about.anarchyorigin.com">О сервере</a>
+    <a href="https://news.anarchyorigin.com">Новости</a>
     <a href="https://anarchyorigin.com/support">Поддержка</a>
     <a href="https://anarchyorigin.com/rules">Правила</a>
     <a href="https://anarchyorigin.com/requisites">Реквизиты</a>
   </div>
-  <div class="footer-copy">© 2026 AnarchyOrigin. Все права защищены.</div>
+  <div class="footer-copy">© <span id="currentYear">2026</span> AnarchyOrigin. Все права защищены.</div>
 </footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://media.anarchyorigin.com/#website",
+      "url": "https://media.anarchyorigin.com/",
+      "name": "AnarchyOrigin — Программа для блогеров",
+      "description": "Медиа-партнёрство с AnarchyOrigin: оплата за видео, процент с продаж и внутриигровые бонусы для блогеров и стримеров Minecraft.",
+      "inLanguage": "ru",
+      "publisher": {
+        "@id": "https://anarchyorigin.com/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://anarchyorigin.com/#organization",
+      "name": "AnarchyOrigin",
+      "url": "https://anarchyorigin.com",
+      "foundingDate": "2026-01-01",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://github.com/RHVHV/about.anarchyorigin.com/releases/download/v1.0.0/icon-server.png"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://media.anarchyorigin.com/#webpage",
+      "url": "https://media.anarchyorigin.com/",
+      "name": "Программа для блогеров — AnarchyOrigin",
+      "inLanguage": "ru",
+      "isPartOf": {
+        "@id": "https://media.anarchyorigin.com/#website"
+      }
+    }
+  ]
+}
+</script>
 
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !burger.contains(e.target)) {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
   });
 
   const reveals = document.querySelectorAll('.reveal');
@@ -1200,6 +1480,111 @@
       card.style.setProperty('--my', `${e.clientY - rect.top}px`);
     });
   });
+
+  async function copyIp(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (err) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    }
+  }
+
+  document.querySelectorAll('[data-ip]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const ok = await copyIp(btn.dataset.ip);
+      if (!ok) return;
+      btn.classList.add('done');
+      setTimeout(() => btn.classList.remove('done'), 1800);
+    });
+  });
+
+  (function() {
+    const el = document.getElementById('monthsWorked');
+    if (!el) return;
+
+    const startYear = 2026;
+    const startMonth = 0;
+
+    function setMonths(currentYear, currentMonth) {
+      const months = Math.max(0, (currentYear - startYear) * 12 + (currentMonth - startMonth));
+      el.dataset.count = months;
+      statObserver.observe(el);
+    }
+
+    fetch('https://worldtime.timezone.io/api/timezone/Europe/Moscow')
+      .then(r => r.json())
+      .then(data => {
+        const dt = new Date(data.datetime);
+        setMonths(dt.getFullYear(), dt.getMonth());
+      })
+      .catch(() => {
+        const now = new Date();
+        setMonths(now.getFullYear(), now.getMonth());
+      });
+  })();
+
+  (function() {
+    const yearEl = document.getElementById('currentYear');
+    if (!yearEl) return;
+
+    fetch('https://worldtime.timezone.io/api/timezone/Europe/Moscow')
+      .then(r => r.json())
+      .then(data => {
+        const dt = new Date(data.datetime);
+        yearEl.textContent = dt.getFullYear();
+      })
+      .catch(() => {
+        yearEl.textContent = new Date().getFullYear();
+      });
+  })();
+
+  (function() {
+    const serverIp = 'mc.anarchyorigin.com';
+    const apiUrl = 'https://api.mcsrvstat.us/3/' + serverIp;
+    const onlineCard = document.getElementById('onlineCard');
+    const playersEl = document.getElementById('playersOnline');
+    if (!onlineCard || !playersEl) return;
+
+    function removeOnlineCard() {
+      onlineCard.remove();
+    }
+
+    function fetchOnline() {
+      fetch(apiUrl)
+        .then(r => r.json())
+        .then(data => {
+          if (!data || !data.online) {
+            removeOnlineCard();
+            return;
+          }
+
+          if (data.players && typeof data.players.online === 'number') {
+            playersEl.textContent = data.players.online;
+          } else {
+            playersEl.textContent = '0';
+          }
+
+          playersEl.classList.remove('updated');
+          void playersEl.offsetWidth;
+          playersEl.classList.add('updated');
+        })
+        .catch(() => {
+          removeOnlineCard();
+        });
+    }
+
+    fetchOnline();
+    setInterval(fetchOnline, 60000);
+  })();
 </script>
 
 </body>

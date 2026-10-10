@@ -34,7 +34,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.mcsrvstat.us">
-<link rel="preconnect" href="https://worldtime.timezone.io">
+<link rel="preconnect" href="https://worldtimeapi.org">
 <link rel="dns-prefetch" href="https://github.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
 <style>
@@ -1241,7 +1241,7 @@
   .contact-btn.email { --acc: #f9a825; --acc-bg: rgba(249,168,37,0.12); --acc-border: rgba(249,168,37,0.3); --acc-shadow: rgba(249,168,37,0.2); }
 
   @media (max-width: 1100px) {
-    .nav-links { gap: 18px; }
+    .nav-links { gap: 20px; }
     .nav-links a { font-size: 13px; }
     .copy-ip { font-size: 12px; padding: 9px 14px; }
     .copy-ip .ip-label { display: none; }
@@ -1249,19 +1249,19 @@
     .nav.scrolled { padding: 12px 24px; }
   }
 
-  @media (max-width: 950px) {
-    .nav-links { display: none; }
-    .nav-actions .copy-ip { display: none; }
-    .burger { display: flex; }
-    .nav { padding: 14px 20px; }
-    .nav.scrolled { padding: 12px 20px; }
-  }
-
   @media (max-width: 900px) {
     .section { padding: 90px 20px; }
     .section-header { margin-bottom: 56px; }
     .hero { padding: 120px 20px 80px; }
     .hero-icon { width: 84px; height: 84px; border-radius: 22px; }
+  }
+
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+    .nav-actions .copy-ip { display: none; }
+    .burger { display: flex; }
+    .nav { padding: 14px 20px; }
+    .nav.scrolled { padding: 12px 20px; }
   }
 
   @media (max-width: 600px) {
@@ -1613,7 +1613,7 @@
     </button>
     <div class="modal-badge">Поддержка</div>
     <h3 id="modalSupportTitle">Выберите способ связи</h3>
-    <p class="modal-desc">Ответим на вопросы по серверу, аккаунту и медиа-программе. Выбирайте удобный канал.</p>
+    <p class="modal-desc">Ответим на вопросы по серверу, аккаунту, оплате и разблокировке. Выбирайте удобный канал.</p>
     <div class="contact-list">
       <a class="contact-btn vk" href="https://vk.me/anarchyorigin" target="_blank" rel="noopener">
         <div class="contact-ico">
@@ -1793,6 +1793,13 @@
 </script>
 
 <script>
+  function fetchWithTimeout(url, ms) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), ms);
+    return fetch(url, { signal: controller.signal })
+      .finally(() => clearTimeout(id));
+  }
+
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
@@ -1872,6 +1879,46 @@
     });
   });
 
+  (function() {
+    const el = document.getElementById('monthsWorked');
+    if (!el) return;
+
+    const startYear = 2026;
+    const startMonth = 0;
+
+    function setMonths(currentYear, currentMonth) {
+      const months = Math.max(0, (currentYear - startYear) * 12 + (currentMonth - startMonth));
+      el.dataset.count = months;
+      statObserver.observe(el);
+    }
+
+    fetchWithTimeout('https://worldtimeapi.org/api/timezone/Europe/Moscow', 8000)
+      .then(r => r.json())
+      .then(data => {
+        const dt = new Date(data.datetime);
+        setMonths(dt.getFullYear(), dt.getMonth());
+      })
+      .catch(() => {
+        const now = new Date();
+        setMonths(now.getFullYear(), now.getMonth());
+      });
+  })();
+
+  (function() {
+    const yearEl = document.getElementById('currentYear');
+    if (!yearEl) return;
+
+    fetchWithTimeout('https://worldtimeapi.org/api/timezone/Europe/Moscow', 8000)
+      .then(r => r.json())
+      .then(data => {
+        const dt = new Date(data.datetime);
+        yearEl.textContent = dt.getFullYear();
+      })
+      .catch(() => {
+        yearEl.textContent = new Date().getFullYear();
+      });
+  })();
+
   async function copyIp(text) {
     try {
       await navigator.clipboard.writeText(text);
@@ -1899,46 +1946,6 @@
   });
 
   (function() {
-    const el = document.getElementById('monthsWorked');
-    if (!el) return;
-
-    const startYear = 2026;
-    const startMonth = 0;
-
-    function setMonths(currentYear, currentMonth) {
-      const months = Math.max(0, (currentYear - startYear) * 12 + (currentMonth - startMonth));
-      el.dataset.count = months;
-      statObserver.observe(el);
-    }
-
-    fetch('https://worldtime.timezone.io/api/timezone/Europe/Moscow')
-      .then(r => r.json())
-      .then(data => {
-        const dt = new Date(data.datetime);
-        setMonths(dt.getFullYear(), dt.getMonth());
-      })
-      .catch(() => {
-        const now = new Date();
-        setMonths(now.getFullYear(), now.getMonth());
-      });
-  })();
-
-  (function() {
-    const yearEl = document.getElementById('currentYear');
-    if (!yearEl) return;
-
-    fetch('https://worldtime.timezone.io/api/timezone/Europe/Moscow')
-      .then(r => r.json())
-      .then(data => {
-        const dt = new Date(data.datetime);
-        yearEl.textContent = dt.getFullYear();
-      })
-      .catch(() => {
-        yearEl.textContent = new Date().getFullYear();
-      });
-  })();
-
-  (function() {
     const serverIp = 'mc.anarchyorigin.com';
     const apiUrl = 'https://api.mcsrvstat.us/3/' + serverIp;
     const onlineCard = document.getElementById('onlineCard');
@@ -1950,7 +1957,7 @@
     }
 
     function fetchOnline() {
-      fetch(apiUrl)
+      fetchWithTimeout(apiUrl, 8000)
         .then(r => r.json())
         .then(data => {
           if (!data || !data.online) {

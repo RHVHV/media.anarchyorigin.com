@@ -529,10 +529,17 @@
   /* ===== STATS SHOWCASE ===== */
   .stats-showcase {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 14px;
     max-width: 1100px;
     margin: 0 auto;
+    transition: max-width 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  /* Когда онлайн скрыт — 4 карточки по центру */
+  .stats-showcase:has(#onlineCard.is-hidden) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 900px;
   }
 
   .stat-panel {
@@ -1522,7 +1529,11 @@
     .copy-ip .ip-label { display: none; }
     .nav { padding: 18px 24px; }
     .nav.scrolled { padding: 12px 24px; }
-    .stats-showcase { grid-template-columns: repeat(3, 1fr); }
+    .stats-showcase { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .stats-showcase:has(#onlineCard.is-hidden) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 600px;
+    }
     .bento { grid-template-columns: repeat(2, 1fr); }
     .bento-item--lg { grid-column: span 2; grid-row: span 2; }
     .bento-item--wide { grid-column: span 2; }
@@ -1580,7 +1591,11 @@
   }
 
   @media (max-width: 700px) {
-    .stats-showcase { grid-template-columns: repeat(2, 1fr); }
+    .stats-showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stats-showcase:has(#onlineCard.is-hidden) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: none;
+    }
     .bento { grid-template-columns: 1fr; grid-auto-rows: auto; }
 
     .bento-item,

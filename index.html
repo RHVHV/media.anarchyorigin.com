@@ -1582,24 +1582,60 @@
   @media (max-width: 700px) {
     .stats-showcase { grid-template-columns: repeat(2, 1fr); }
     .bento { grid-template-columns: 1fr; grid-auto-rows: auto; }
+
     .bento-item,
     .bento-item--lg,
-    .bento-item--wide,
+    .bento-item--wide {
+      grid-column: span 1;
+      grid-row: span 1;
+      padding: 78px 22px 24px;
+      min-height: 190px;
+      justify-content: flex-start;
+    }
+
     .bento-item--full {
       grid-column: span 1;
       grid-row: span 1;
-      padding: 26px 24px;
-      min-height: 180px;
-    }
-    .bento-item--full {
+      padding: 24px 22px;
+      min-height: auto;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 18px;
+      gap: 16px;
+      justify-content: flex-start;
     }
-    .bento-item--full .bento-icon { width: 52px; height: 52px; }
+
+    .bento-item--full .bento-icon {
+      position: static;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+    }
+    .bento-item--full .bento-icon svg { width: 24px; height: 24px; }
+    .bento-item--full .bento-num {
+      position: static;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .bento-item--full h3 { font-size: 18px; }
+    .bento-item--full p { font-size: 14.5px; }
+
     .bento-item--lg h3 { font-size: 20px; }
     .bento-item--lg p { font-size: 14.5px; max-width: 100%; }
+
+    .bento-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      top: 18px;
+      left: 20px;
+    }
+    .bento-icon svg { width: 20px; height: 20px; }
+
+    .bento-num {
+      top: 22px;
+      right: 20px;
+    }
   }
 
   @media (max-width: 600px) {
@@ -1634,6 +1670,28 @@
     .reward-tilt-inner ul li { font-size: 14px; }
     .reward-icon-lg { width: 48px; height: 48px; }
     .reward-icon-lg svg { width: 22px; height: 22px; }
+
+    .bento-item,
+    .bento-item--lg,
+    .bento-item--wide {
+      padding: 74px 20px 22px;
+      min-height: 180px;
+    }
+
+    .bento-icon {
+      width: 40px;
+      height: 40px;
+      top: 16px;
+      left: 18px;
+      border-radius: 10px;
+    }
+    .bento-icon svg { width: 18px; height: 18px; }
+
+    .bento-num {
+      top: 20px;
+      right: 18px;
+      font-size: 11px;
+    }
   }
 
   @media (min-width: 1500px) {
